@@ -12,3 +12,7 @@ kube_config_cluster.yml
 
 # ignore the rke cluster.yml created by Ansible
 cluster.yml
+
+# ignore the ssh key files
+ssh_key_rke
+ssh_key_rke.pub
