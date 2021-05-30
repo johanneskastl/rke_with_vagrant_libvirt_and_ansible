@@ -33,3 +33,21 @@
     - role: 'prepare_node_for_rke'
       vars:
         ssh_key_to_add: "{{ lookup('file', '../ssh_key_rke.pub') }}"
+
+#
+# Prepare the cluster.yml on the Ansible control host
+#
+- name: 'Prepare the cluster.yml on the Ansible control host'
+  hosts: 'all'
+  gather_facts: 'yes'
+  become: 'false'
+
+  roles:
+    - role: 'create_rke_cluster_yml'
+      vars:
+        path_to_cluster_yml: '../cluster.yml'
+        ssh_key_path: 'ssh_key_rke'
+        rke_controlplane_nodes_group: 'rkeservers'
+        rke_worker_nodes_group: 'rkeworkers'
+      delegate_to: 'localhost'
+      run_once: 'true'
