@@ -1,0 +1,35 @@
+---
+
+#
+# generate the SSH key pair
+#
+- name: 'Generate ssh key pair'
+  hosts: 'all'
+  gather_facts: 'no'
+  become: 'false'
+ 
+  tasks:
+
+    - name: 'Create a new SSH key pair'
+      openssh_keypair:
+        path: '../ssh_key_rke'
+        type: 'ecdsa'
+        state: 'present'
+        force: 'no'
+        comment: 'rke_with_vagrant_libvirt'
+      delegate_to: 'localhost'
+      run_once: 'true'
+
+#
+# Prepare the nodes
+#
+- name: 'Prepare all nodes'
+  hosts: 'all'
+  gather_facts: 'yes'
+  become: 'true'
+
+  roles:
+    - role: 'zypper_ref_accept_keys'
+    - role: 'prepare_node_for_rke'
+      vars:
+        ssh_key_to_add: "{{ lookup('file', '../ssh_key_rke.pub') }}"
