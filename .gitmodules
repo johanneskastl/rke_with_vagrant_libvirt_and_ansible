@@ -4,3 +4,6 @@
 [submodule "ansible/roles/zypper_ref_accept_keys"]
 	path = ansible/roles/zypper_ref_accept_keys
 	url = https://github.com/johanneskastl/ansible-role-zypper_ref_accept_keys.git
+[submodule "ansible/roles/prepare_node_for_rke"]
+	path = ansible/roles/prepare_node_for_rke
+	url = https://github.com/johanneskastl/ansible-role-prepare_node_for_rke.git
