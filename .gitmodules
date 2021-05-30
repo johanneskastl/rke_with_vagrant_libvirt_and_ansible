@@ -7,3 +7,6 @@
 [submodule "ansible/roles/prepare_node_for_rke"]
 	path = ansible/roles/prepare_node_for_rke
 	url = https://github.com/johanneskastl/ansible-role-prepare_node_for_rke.git
+[submodule "ansible/roles/create_rke_cluster_yml"]
+	path = ansible/roles/create_rke_cluster_yml
+	url = https://github.com/johanneskastl/ansible-role-create_rke_cluster_yml.git
