@@ -86,8 +86,17 @@ Please make sure you do not accidentally commit your new ssh key files somehow (
 
 You can remove your vagrant VMs using `vagrant destroy`, but you need to manually remove the following files before starting again:
 ```bash
+cluster.yml
 cluster.rkestate
 kube_config_cluster.yml
 ```
 
 Otherwise rke will try to restore the state saved in the `cluster.rkestate` file. And will fail horribly...
+
+In case you are lazy you can just use Ansible to clean up for you. Please not that this WILL NOT ASK FOR CONFIRMATION!
+
+This will delete all rke-related files as well as the SSH keys!
+
+```
+ansible-playbook ansible/playbook-DELETE_everything_to_start_from_scratch.yml
+```
