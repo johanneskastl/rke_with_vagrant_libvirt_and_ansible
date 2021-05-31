@@ -17,6 +17,50 @@ In contrast to [this Vagrant setup](https://github.com/johanneskastl/rke_with_va
 5. Run `kubectl --kubeconfig kube_config_cluster.yml get nodes` and you should see your three controlplane nodes as well as the worker nodes.
 6. Party!
 
+## Changing the number of worker nodes
+
+To change the number of worker nodes, you need to modify the `Vagrantfile` and tweak two lines:
+
+1. Setting the number of workers (in this example to `2`):
+
+```
+  ###################################################################################
+  # define number of workers
+  W = 2
+```
+
+2. Adding the additional worker nodes to the `ansible_groups` line:
+```
+            ansible.groups = {
+              "rkeservers"  => [ "rkeserver1", "rkeserver2", "rkeserver3" ],
+              "rkeworkers"  => [ "rkeworker1", "rkeworker2" ]
+            }
+```
+
+Of course you need to make sure your host system has enough resources...
+
+## Changing the number of controlplane nodes
+
+To change the number of controlplane nodes, you can modify the `Vagrantfile` similar to adjusting the worker node number described above.
+
+1. Setting the number of servers (in this example to `1`):
+
+```
+  ###################################################################################
+  # define number of controlplane nodes
+  M = 5
+```
+
+2. Adding the additional controlplane nodes to the `ansible_groups` line:
+```
+            ansible.groups = {
+              "rkeservers"  => [ "rkeserver1", "rkeserver2", "rkeserver3", "rkeserver4", "rkeserver5" ],
+              "rkeworkers"  => [ "rkeworker1" ]
+            }
+```
+
+Of course you need to make sure your host system has enough resources...
+
 ## Adjusting size in the Vagrantfile
 
 In case you want or need to change the VM sizing, change the following lines in the `Vagrantfile`:
